@@ -27,10 +27,13 @@ def build_datasets(data_dir, img_size, batch_size):
         ds = tf.keras.utils.image_dataset_from_directory(
             os.path.join(data_dir, split), image_size=(img_size,img_size),
             batch_size=batch_size, shuffle=shuffle, seed=SEED, label_mode="binary")
+        class_names = ds.class_names
         ds = ds.map(lambda x,y: (norm(x),y), num_parallel_calls=tf.data.AUTOTUNE)
-        return ds.prefetch(tf.data.AUTOTUNE)
-    train_ds = load("train", True); val_ds = load("val", False); test_ds = load("test", False)
-    return train_ds, val_ds, test_ds, train_ds.class_names
+        return ds.prefetch(tf.data.AUTOTUNE), class_names
+    train_ds, class_names = load("train", True)
+    val_ds, _ = load("val", False)
+    test_ds, _ = load("test", False)
+    return train_ds, val_ds, test_ds, class_names
 
 def build_model(img_size):
     aug = tf.keras.Sequential([

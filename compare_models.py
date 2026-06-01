@@ -33,10 +33,13 @@ def build_datasets(data_dir, img_size, batch_size):
     def prep(split, shuffle):
         ds = tf.keras.utils.image_dataset_from_directory(os.path.join(data_dir,split),
              image_size=(img_size,img_size), batch_size=batch_size, shuffle=shuffle, seed=SEED, label_mode="binary")
+        class_names = ds.class_names
         ds = ds.map(lambda x,y:(norm(x),y), num_parallel_calls=tf.data.AUTOTUNE)
-        return ds.prefetch(tf.data.AUTOTUNE)
-    train_ds=prep("train",True); val_ds=prep("val",False); test_ds=prep("test",False)
-    return train_ds, val_ds, test_ds, train_ds.class_names
+        return ds.prefetch(tf.data.AUTOTUNE), class_names
+    train_ds, class_names = prep("train",True)
+    val_ds, _ = prep("val",False)
+    test_ds, _ = prep("test",False)
+    return train_ds, val_ds, test_ds, class_names
 
 def build_model(name, img_size):
     cfg = BACKBONE_CONFIGS[name]

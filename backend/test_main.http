@@ -1,0 +1,48 @@
+### Fruty API - peticiones de prueba
+### Compatible con la extension "REST Client" de VS Code o IntelliJ HTTP Client.
+### Ejecuta cada peticion pulsando "Send Request" sobre la linea ###.
+
+@host = http://localhost:8000
+
+### 1) Salud del servicio (comprueba que el modelo esta cargado)
+GET {{host}}/health
+
+### 2) Lista de modelos (metricas + estado de carga)
+GET {{host}}/models
+
+### 2b) Informacion de un modelo concreto
+GET {{host}}/model-info?model=ConvNeXtTiny
+
+### 2c) Calentar (cargar) un modelo en memoria
+POST {{host}}/models/ConvNeXtTiny/load
+
+### 3) Raiz / listado de endpoints
+GET {{host}}/
+
+### 4) Prediccion con una imagen
+# Cambia la ruta del archivo por una imagen real de tu equipo.
+# La extension REST Client sustituye < por el contenido del archivo.
+POST {{host}}/predict
+Content-Type: multipart/form-data; boundary=----FrutyBoundary
+
+------FrutyBoundary
+Content-Disposition: form-data; name="model"
+
+EfficientNetB0
+------FrutyBoundary
+Content-Disposition: form-data; name="image"; filename="muestra.jpg"
+Content-Type: image/jpeg
+
+< ./muestra.jpg
+------FrutyBoundary--
+
+### 5) Prediccion con tipo de archivo invalido -> debe devolver 422
+POST {{host}}/predict
+Content-Type: multipart/form-data; boundary=----FrutyBoundary
+
+------FrutyBoundary
+Content-Disposition: form-data; name="image"; filename="nota.txt"
+Content-Type: text/plain
+
+esto no es una imagen
+------FrutyBoundary--

@@ -1,0 +1,11 @@
+# --- API ---
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.29,<1.0
+python-multipart>=0.0.9
+python-dotenv>=1.0
+
+# --- Modelo / inferencia ---
+# tensorflow-cpu disponible para Linux y Windows. En macOS usa: tensorflow
+tensorflow-cpu>=2.16,<2.20
+pillow>=10.0
+numpy>=1.26,<2.2

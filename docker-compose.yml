@@ -1,0 +1,39 @@
+# Fruty - orquestacion de backend (FastAPI) y frontend (React/Nginx).
+# Uso:  docker compose up --build
+# Frontend: http://localhost:5173   |   Backend: http://localhost:8000
+
+services:
+  backend:
+    build: ./backend
+    container_name: fruty-backend
+    ports:
+      - "8000:8000"
+    environment:
+      # El frontend se sirve en :5173, asi que ese es el origen CORS.
+      - CORS_ORIGINS=http://localhost:5173,http://127.0.0.1:5173
+      - PREPROCESS=rescale
+    volumes:
+      # Montamos el modelo desde el host (no se incluye en la imagen).
+      - ./backend/model:/app/model:ro
+    networks:
+      - fruty-net
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # En este compose el navegador llama directamente al backend en :8000.
+        VITE_API_URL: http://localhost:8000
+    container_name: fruty-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - fruty-net
+    restart: unless-stopped
+
+networks:
+  fruty-net:
+    driver: bridge

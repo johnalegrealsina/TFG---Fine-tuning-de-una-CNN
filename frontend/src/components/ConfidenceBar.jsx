@@ -22,12 +22,12 @@ export default function ConfidenceBar({ value, isRotten }) {
   return (
     <div className="w-full">
       <div className="mb-1.5 flex items-center justify-between text-sm">
-        <span className="text-white/60">Confianza</span>
-        <span className="font-semibold tabular-nums text-white/90">
+        <span className="text-on-surface-variant">Confianza</span>
+        <span className="font-semibold tabular-nums text-on-surface">
           {pct.toFixed(1)}%
         </span>
       </div>
-      <div className="h-3 w-full overflow-hidden rounded-full bg-white/10">
+      <div className="h-3 w-full overflow-hidden rounded-full bg-surface-container-high">
         <div
           className={`h-full rounded-full ${barColor} transition-[width] duration-1000 ease-out`}
           style={{ width: `${width}%` }}

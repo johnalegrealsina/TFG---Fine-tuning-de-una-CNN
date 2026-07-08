@@ -119,36 +119,60 @@ export default function App() {
   }
 
   return (
-    <div className="app-bg min-h-screen text-white">
-      <div className="mx-auto flex min-h-screen max-w-2xl flex-col px-4 py-8 sm:py-12">
-        {/* Cabecera */}
-        <header className="mb-6 text-center">
-          <h1 className="text-4xl font-black tracking-tight sm:text-5xl">
-            <span className="bg-gradient-to-r from-fresh-glow to-fresh bg-clip-text text-transparent">
-              Fruty
-            </span>{" "}
-            🍏
-          </h1>
-          <p className="mt-2 text-white/60">
-            Sube una foto de tu fruta o verdura y descubre si está{" "}
-            <span className="text-fresh-glow">fresca</span> o{" "}
-            <span className="text-rotten-glow">podrida</span>.
-          </p>
-        </header>
-
-        {/* Pestañas */}
-        <div className="mb-6 flex justify-center">
-          <div className="inline-flex rounded-xl border border-white/10 bg-white/[0.03] p-1">
-            <TabButton active={tab === "analizar"} onClick={() => setTab("analizar")}>
-              🔍 Analizar
-            </TabButton>
-            <TabButton active={tab === "proceso"} onClick={() => setTab("proceso")}>
-              🔬 Proceso {result && <Dot />}
-            </TabButton>
+    <div className="app-bg min-h-screen font-sans text-on-surface">
+      {/* TopAppBar */}
+      <header className="sticky top-0 z-50 border-b border-outline-variant/40 bg-surface/80 backdrop-blur-md">
+        <div className="mx-auto flex h-20 max-w-5xl items-center justify-between px-4 md:px-8">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-3xl text-primary">
+              potted_plant
+            </span>
+            <h1 className="font-serif text-2xl font-semibold tracking-tight text-primary">
+              AlimentoPuro
+            </h1>
+          </div>
+          <div className="hidden items-center gap-8 md:flex">
+            <span className="font-serif text-[18px] text-primary">Detector</span>
+            <span className="font-serif text-[18px] text-on-surface-variant">
+              Metodología
+            </span>
           </div>
         </div>
+      </header>
 
-        <main className="flex-1">
+      <main className="mx-auto max-w-5xl">
+        {/* Hero */}
+        <section className="flex flex-col items-center justify-center px-4 py-14 text-center sm:py-16">
+          <span className="mb-4 inline-block rounded-full bg-tertiary-fixed px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-on-tertiary-fixed-variant">
+            Pureza Botánica
+          </span>
+          <h2 className="font-serif text-4xl font-semibold leading-tight text-primary sm:text-5xl">
+            Detector de frescura
+          </h2>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-on-surface-variant">
+            Sube una foto de tu fruta o verdura y nuestra visión artificial te
+            dirá si está{" "}
+            <span className="font-semibold text-fresh">fresca</span> o{" "}
+            <span className="font-semibold text-rotten">podrida</span>.
+          </p>
+        </section>
+
+        {/* Zona funcional */}
+        <div className="mx-auto max-w-2xl px-4 pb-8">
+          {/* Pestañas */}
+          <div className="mb-6 flex justify-center">
+            <div className="inline-flex rounded-xl border border-outline-variant/60 bg-surface-container-lowest/70 p-1">
+              <TabButton active={tab === "analizar"} onClick={() => setTab("analizar")}>
+                <span className="material-symbols-outlined text-[20px]">search</span>
+                Analizar
+              </TabButton>
+              <TabButton active={tab === "proceso"} onClick={() => setTab("proceso")}>
+                <span className="material-symbols-outlined text-[20px]">biotech</span>
+                Proceso {result && <Dot />}
+              </TabButton>
+            </div>
+          </div>
+
           {tab === "analizar" ? (
             <>
               <ModelSelector
@@ -178,42 +202,46 @@ export default function App() {
               )}
 
               {error && (
-                <div className="animate-fade-in mt-5 flex items-start gap-3 rounded-xl border border-rotten/30 bg-rotten/10 px-4 py-3 text-sm text-rotten-glow">
-                  <span className="text-lg leading-none">⛔</span>
+                <div className="animate-fade-in mt-5 flex items-start gap-3 rounded-xl border border-rotten/30 bg-rotten-container px-4 py-3 text-sm text-rotten">
+                  <span className="material-symbols-outlined text-rotten">error</span>
                   <p>{error}</p>
                 </div>
               )}
 
               {history.length > 0 && (
                 <section className="mt-10">
-                  <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/40">
+                  <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-on-surface-variant/70">
                     Historial de la sesión
                   </h3>
                   <ul className="space-y-2">
                     {history.map((h) => (
                       <li
                         key={h.ts}
-                        className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2"
+                        className="flex items-center gap-3 rounded-xl border border-outline-variant/50 bg-surface-container-lowest/70 px-3 py-2"
                       >
                         {h.thumb && (
                           <img
                             src={h.thumb}
                             alt=""
-                            className="h-10 w-10 shrink-0 rounded-lg object-cover ring-1 ring-white/10"
+                            className="h-10 w-10 shrink-0 rounded-lg object-cover ring-1 ring-outline-variant/40"
                           />
                         )}
-                        <span className={`text-lg ${h.clase === "rotten" ? "text-rotten-glow" : "text-fresh-glow"}`}>
-                          {h.clase === "rotten" ? "⚠️" : "✅"}
+                        <span
+                          className={`material-symbols-outlined ${
+                            h.clase === "rotten" ? "text-rotten" : "text-fresh"
+                          }`}
+                        >
+                          {h.clase === "rotten" ? "warning" : "eco"}
                         </span>
-                        <span className="font-semibold">
+                        <span className="font-semibold text-on-surface">
                           {h.clase === "rotten" ? "Podrida" : "Fresca"}
                         </span>
                         {h.modelo && (
-                          <span className="rounded-full bg-white/5 px-2 py-0.5 text-xs text-white/40">
+                          <span className="rounded-full bg-surface-container-high px-2 py-0.5 text-xs text-on-surface-variant">
                             {h.modelo}
                           </span>
                         )}
-                        <span className="ml-auto text-sm text-white/50">
+                        <span className="ml-auto text-sm text-on-surface-variant/80">
                           {h.confianza.toFixed(1)}% · {h.tiempo_inferencia_ms.toFixed(0)} ms
                         </span>
                       </li>
@@ -225,25 +253,78 @@ export default function App() {
           ) : (
             <ProcessView result={result} previewUrl={previewUrl} />
           )}
-        </main>
 
-        {/* Pie */}
-        <footer className="mt-12 border-t border-white/10 pt-6 text-center">
-          <p className="mb-3 text-xs uppercase tracking-wider text-white/40">
+          <p className="mx-auto mt-8 max-w-md text-center text-sm italic leading-tight text-on-surface-variant/70">
+            Esta web funciona con inteligencia artificial; sus resultados deben
+            considerarse orientativos y no decisorios.
+          </p>
+        </div>
+
+        {/* Productos de entrenamiento */}
+        <section className="border-t border-outline-variant/40 px-4 py-12">
+          <p className="mb-4 text-center text-xs font-semibold uppercase tracking-wider text-on-surface-variant/70">
             Entrenado con productos como
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             {TOP_PRODUCTS.map(([icon, name]) => (
               <span
                 key={name}
-                className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-sm text-white/70"
+                className="inline-flex items-center gap-1.5 rounded-full border border-outline-variant/50 bg-surface-container-lowest/60 px-3 py-1 text-sm text-on-surface-variant"
               >
                 <span>{icon}</span> {name}
               </span>
             ))}
           </div>
-        </footer>
-      </div>
+        </section>
+
+        {/* Metodología de la IA */}
+        <section className="bg-surface-container/30 px-4 py-20 md:px-8">
+          <div className="mx-auto max-w-4xl space-y-6">
+            <h3 className="font-serif text-3xl font-medium text-primary sm:text-4xl">
+              Descubre cómo se ha hecho esta IA
+            </h3>
+            <div className="h-1 w-20 rounded-full bg-secondary-fixed-dim" />
+            <p className="max-w-2xl text-lg leading-relaxed text-on-surface-variant">
+              Nuestro algoritmo ha sido entrenado meticulosamente utilizando
+              miles de muestras capturadas en entornos controlados y reales.
+            </p>
+            <div className="grid max-w-xl grid-cols-2 gap-4 pt-2">
+              <div className="glass-card rounded-lg p-4">
+                <span className="block font-serif text-2xl text-secondary">50k+</span>
+                <span className="text-xs uppercase tracking-tight text-on-surface-variant/70">
+                  Muestras analizadas
+                </span>
+              </div>
+              <div className="glass-card rounded-lg p-4">
+                <span className="block font-serif text-2xl text-secondary">98.4%</span>
+                <span className="text-xs uppercase tracking-tight text-on-surface-variant/70">
+                  Precisión de pureza
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t border-outline-variant/50 bg-surface-container px-4 py-12 md:px-8">
+        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 md:flex-row">
+          <div className="flex flex-col items-center gap-2 md:items-start">
+            <h4 className="font-serif text-xl tracking-tight text-secondary">
+              AlimentoPuro
+            </h4>
+            <p className="text-center text-sm text-on-surface-variant/80 md:text-left">
+              © 2024 AlimentoPuro. Inteligencia Artificial aplicada a alimentos
+              frescos.
+            </p>
+          </div>
+          <div className="flex gap-6">
+            <span className="text-sm text-on-surface-variant">Privacidad</span>
+            <span className="text-sm text-on-surface-variant">Términos</span>
+            <span className="text-sm text-on-surface-variant">Metodología IA</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
@@ -255,7 +336,9 @@ function TabButton({ active, onClick, children }) {
       onClick={onClick}
       className={[
         "flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold transition",
-        active ? "bg-fresh text-black" : "text-white/60 hover:text-white/90",
+        active
+          ? "bg-primary-container text-primary-fixed shadow-sm"
+          : "text-on-surface-variant hover:text-primary",
       ].join(" ")}
     >
       {children}
@@ -264,5 +347,7 @@ function TabButton({ active, onClick, children }) {
 }
 
 function Dot() {
-  return <span className="ml-0.5 inline-block h-1.5 w-1.5 rounded-full bg-current align-middle" />;
+  return (
+    <span className="ml-0.5 inline-block h-1.5 w-1.5 rounded-full bg-current align-middle" />
+  );
 }

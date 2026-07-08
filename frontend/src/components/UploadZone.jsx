@@ -77,43 +77,48 @@ export default function UploadZone({
         onDrop={handleDrop}
         onClick={() => !file && !loading && inputRef.current?.click()}
         className={[
-          "relative flex flex-col items-center justify-center rounded-3xl border-2 border-dashed p-6 text-center transition-all",
+          "wood-texture group relative flex flex-col items-center justify-center rounded-xl border-2 border-dashed p-6 text-center transition-all",
           file ? "cursor-default" : "cursor-pointer",
           dragging
-            ? "border-fresh bg-fresh/10 scale-[1.01]"
-            : "border-white/15 bg-white/5 hover:border-white/30 hover:bg-white/[0.07]",
+            ? "scale-[1.01] border-secondary bg-secondary-fixed/20"
+            : "border-outline-variant hover:border-secondary",
         ].join(" ")}
       >
         {previewUrl ? (
           <div className="w-full">
-            <div className="mx-auto max-w-sm overflow-hidden rounded-2xl ring-1 ring-white/10">
+            <div className="mx-auto max-w-sm overflow-hidden rounded-lg ring-1 ring-outline-variant/50">
               <img
                 src={previewUrl}
                 alt="Vista previa"
-                className="max-h-72 w-full object-contain bg-black/40"
+                className="max-h-72 w-full bg-surface-container object-contain"
               />
             </div>
-            <p className="mt-3 truncate text-sm text-white/50">
+            <p className="mt-3 truncate text-sm text-on-surface-variant">
               {file?.name}{" "}
-              <span className="text-white/30">
+              <span className="text-on-surface-variant/60">
                 ({(file?.size / 1024).toFixed(0)} KB)
               </span>
             </p>
           </div>
         ) : (
-          <div className="py-10">
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-fresh/15 text-3xl">
-              📷
+          <div className="space-y-4 py-8">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-surface-container-lowest shadow-sm transition-transform duration-300 group-hover:scale-110">
+              <span className="material-symbols-outlined text-4xl text-secondary">
+                photo_camera
+              </span>
             </div>
-            <p className="text-lg font-medium text-white/90">
-              Arrastra una imagen aqui
-            </p>
-            <p className="mt-1 text-sm text-white/50">
-              o haz clic para seleccionar un archivo
-            </p>
-            <p className="mt-3 text-xs text-white/30">
-              JPEG · PNG · WEBP · GIF · máx. 10 MB
-            </p>
+            <div className="space-y-1">
+              <p className="font-serif text-2xl text-primary">Sube tus fotografías</p>
+              <p className="text-sm text-on-surface-variant">
+                Arrastra los archivos aquí o haz clic para seleccionar
+              </p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-2 pt-2">
+              <Chip>JPG</Chip>
+              <Chip>PNG</Chip>
+              <Chip>WEBP</Chip>
+              <Chip>Máx. 10MB</Chip>
+            </div>
           </div>
         )}
       </div>
@@ -124,14 +129,17 @@ export default function UploadZone({
           type="button"
           onClick={onAnalyze}
           disabled={!file || loading}
-          className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-fresh px-6 py-3 font-semibold text-black transition hover:bg-fresh-glow disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/40"
+          className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary-container px-6 py-3.5 font-semibold text-primary-fixed shadow-md transition hover:brightness-110 disabled:cursor-not-allowed disabled:bg-surface-container-high disabled:text-on-surface-variant/50 disabled:shadow-none"
         >
           {loading ? (
             <>
               <Spinner /> Analizando…
             </>
           ) : (
-            <>🔍 Analizar</>
+            <>
+              <span className="material-symbols-outlined text-[20px]">analytics</span>
+              Comprobar
+            </>
           )}
         </button>
 
@@ -140,9 +148,10 @@ export default function UploadZone({
           type="button"
           onClick={() => cameraRef.current?.click()}
           disabled={loading}
-          className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 font-medium text-white/80 transition hover:bg-white/10 disabled:opacity-40 sm:hidden"
+          className="flex items-center justify-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-5 py-3.5 font-medium text-on-surface-variant transition hover:bg-surface-container disabled:opacity-40 sm:hidden"
         >
-          📸 Cámara
+          <span className="material-symbols-outlined text-[20px]">photo_camera</span>
+          Cámara
         </button>
 
         {file && (
@@ -150,13 +159,21 @@ export default function UploadZone({
             type="button"
             onClick={onClear}
             disabled={loading}
-            className="rounded-xl border border-white/15 bg-white/5 px-5 py-3 font-medium text-white/80 transition hover:bg-white/10 disabled:opacity-40"
+            className="rounded-lg border border-outline-variant bg-surface-container-lowest px-5 py-3.5 font-medium text-on-surface-variant transition hover:bg-surface-container disabled:opacity-40"
           >
             Quitar
           </button>
         )}
       </div>
     </div>
+  );
+}
+
+function Chip({ children }) {
+  return (
+    <span className="rounded-lg border border-outline-variant/40 bg-surface-container-lowest/60 px-3 py-1 text-xs font-semibold text-outline">
+      {children}
+    </span>
   );
 }
 

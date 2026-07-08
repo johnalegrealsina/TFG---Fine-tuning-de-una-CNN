@@ -11,34 +11,34 @@ export default function ResultCard({ result, previewUrl, onReset }) {
 
   const accent = isRotten
     ? {
-        ring: "ring-rotten/40",
-        glow: "shadow-[0_0_60px_-15px_rgba(239,68,68,0.6)]",
-        text: "text-rotten-glow",
+        ring: "ring-rotten/30",
+        glow: "shadow-[0_20px_60px_-25px_rgba(186,26,26,0.45)]",
+        text: "text-rotten",
         label: "PODRIDA",
-        icon: "⚠️",
-        chip: "bg-rotten/15 text-rotten-glow",
+        icon: "warning",
+        chip: "bg-rotten-container text-rotten",
       }
     : {
-        ring: "ring-fresh/40",
-        glow: "shadow-[0_0_60px_-15px_rgba(34,197,94,0.6)]",
-        text: "text-fresh-glow",
+        ring: "ring-fresh/30",
+        glow: "shadow-[0_20px_60px_-25px_rgba(46,125,70,0.45)]",
+        text: "text-fresh",
         label: "FRESCA",
-        icon: "✅",
-        chip: "bg-fresh/15 text-fresh-glow",
+        icon: "eco",
+        chip: "bg-fresh-container text-fresh-on",
       };
 
   return (
     <div
-      className={`animate-fade-in-up rounded-3xl border border-white/10 bg-white/[0.04] p-6 ring-1 backdrop-blur ${accent.ring} ${accent.glow}`}
+      className={`glass-card animate-fade-in-up rounded-xl p-6 ring-1 ${accent.ring} ${accent.glow}`}
     >
       <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-stretch">
         {/* Imagen analizada */}
         {previewUrl && (
-          <div className="w-full overflow-hidden rounded-2xl ring-1 ring-white/10 sm:w-44 sm:shrink-0">
+          <div className="w-full overflow-hidden rounded-lg ring-1 ring-outline-variant/50 sm:w-44 sm:shrink-0">
             <img
               src={previewUrl}
               alt="Imagen analizada"
-              className="h-44 w-full bg-black/40 object-cover"
+              className="h-44 w-full bg-surface-container object-cover"
             />
           </div>
         )}
@@ -46,12 +46,16 @@ export default function ResultCard({ result, previewUrl, onReset }) {
         {/* Resultado */}
         <div className="flex flex-1 flex-col justify-center">
           <div className="flex items-center gap-3">
-            <span className="animate-pop text-5xl leading-none">{accent.icon}</span>
+            <span
+              className={`material-symbols-outlined animate-pop text-5xl leading-none ${accent.text}`}
+            >
+              {accent.icon}
+            </span>
             <div>
-              <p className="text-xs uppercase tracking-widest text-white/40">
+              <p className="text-xs uppercase tracking-widest text-on-surface-variant/60">
                 Resultado
               </p>
-              <h2 className={`text-3xl font-black tracking-tight ${accent.text}`}>
+              <h2 className={`font-serif text-3xl font-semibold tracking-tight ${accent.text}`}>
                 {accent.label}
               </h2>
             </div>
@@ -69,22 +73,22 @@ export default function ResultCard({ result, previewUrl, onReset }) {
             <ConfidenceBar value={result.confianza} isRotten={isRotten} />
           </div>
 
-          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-sm text-white/50">
+          <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-sm text-on-surface-variant/80">
             {result.modelo && (
               <span>
                 Modelo:{" "}
-                <span className="font-medium text-white/80">{result.modelo}</span>
+                <span className="font-medium text-on-surface">{result.modelo}</span>
               </span>
             )}
             <span>
               P(podrida):{" "}
-              <span className="font-medium text-white/80">
+              <span className="font-medium text-on-surface">
                 {(result.probabilidad_rotten * 100).toFixed(1)}%
               </span>
             </span>
             <span>
               Inferencia:{" "}
-              <span className="font-medium text-white/80">
+              <span className="font-medium text-on-surface">
                 {result.tiempo_inferencia_ms.toFixed(0)} ms
               </span>
             </span>
@@ -95,9 +99,10 @@ export default function ResultCard({ result, previewUrl, onReset }) {
       <button
         type="button"
         onClick={onReset}
-        className="mt-6 w-full rounded-xl border border-white/15 bg-white/5 px-6 py-3 font-semibold text-white/90 transition hover:bg-white/10"
+        className="mt-6 flex w-full items-center justify-center gap-2 rounded-lg border border-outline-variant bg-surface-container-lowest px-6 py-3 font-semibold text-primary transition hover:bg-surface-container"
       >
-        ↻ Analizar otra imagen
+        <span className="material-symbols-outlined text-[20px]">refresh</span>
+        Analizar otra imagen
       </button>
     </div>
   );

@@ -51,35 +51,11 @@ MODELS_REGISTRY = {
     "EfficientNetB0": {
         "archivo": "EfficientNetB0_best.keras",
         "arquitectura": "EfficientNetB0",
-        "descripcion": "Red eficiente de Google. La mas precisa y ligera de las tres.",
+        "descripcion": "Red eficiente de Google. Modelo de produccion de Fruty.",
         "preprocesado_interno": "Rescaling(255) + normalizacion ImageNet (integrada)",
         "metricas": {
             "accuracy": 0.9843, "auc": 0.9985, "recall_rotten": 0.9814,
             "f1_macro": 0.9842, "params_M": 4.06,
-        },
-    },
-    "ConvNeXtTiny": {
-        "archivo": "ConvNeXtTiny_best.keras",
-        "arquitectura": "ConvNeXtTiny",
-        "descripcion": "CNN moderna inspirada en Transformers (Meta AI).",
-        "preprocesado_interno": "Normalizacion de ConvNeXt (integrada)",
-        "metricas": {
-            "accuracy": 0.8941, "auc": 0.9603, "recall_rotten": 0.8697,
-            "f1_macro": 0.8938, "params_M": 27.82,
-        },
-    },
-    "ResNet50": {
-        "archivo": "ResNet50_best.keras",
-        "arquitectura": "ResNet50",
-        "descripcion": "Red residual clasica de 50 capas. Mayor recall de podridas.",
-        "preprocesado_interno": "resnet.preprocess_input (BGR + media ImageNet)",
-        # El modelo guarda una capa Lambda(resnet.preprocess_input). Keras 3 no
-        # puede deserializar esa funcion por su nombre, asi que se la pasamos
-        # explicitamente via custom_objects al cargar.
-        "preprocess_module": "resnet",
-        "metricas": {
-            "accuracy": 0.8499, "auc": 0.9565, "recall_rotten": 0.9695,
-            "f1_macro": 0.8433, "params_M": 23.6,
         },
     },
 }

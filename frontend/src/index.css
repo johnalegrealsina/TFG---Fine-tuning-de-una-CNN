@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html,
@@ -14,16 +14,45 @@ body,
 
 body {
   margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    Helvetica, Arial, sans-serif;
+  font-family: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: #1c1c19;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Fondo oscuro con un sutil resplandor verde. */
+/* Fondo pergamino con dos sutiles auras (musgo verde / madera). */
 .app-bg {
-  background:
-    radial-gradient(1100px 600px at 50% -10%, rgba(34, 197, 94, 0.12), transparent 60%),
-    radial-gradient(900px 500px at 90% 110%, rgba(239, 68, 68, 0.08), transparent 60%),
-    #070a07;
+  background-color: #fcf9f4;
+  background-image:
+    radial-gradient(at 0% 0%, rgba(124, 156, 111, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(124, 87, 48, 0.05) 0px, transparent 50%);
+}
+
+/* Tarjeta de vidrio esmerilado. */
+.glass-card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 0.5px solid rgba(6, 27, 14, 0.1);
+}
+
+/* Textura de madera muy sutil para la zona de carga. */
+.wood-texture {
+  background-color: #f6f3ee;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(121, 84, 45, 0.02) 0px,
+    rgba(121, 84, 45, 0.02) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+/* Ajuste base de los iconos Material Symbols. */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  vertical-align: middle;
+  line-height: 1;
+  user-select: none;
 }

@@ -68,6 +68,17 @@ export default function UploadZone({
         onChange={(e) => validateAndSelect(e.target.files?.[0])}
       />
 
+      {/* Consejo para mejores resultados */}
+      <div className="mb-3 flex items-start gap-2.5 rounded-xl border border-outline-variant/50 bg-tertiary-fixed/40 px-4 py-2.5">
+        <span className="material-symbols-outlined mt-0.5 text-[20px] text-on-tertiary-fixed-variant">
+          lightbulb
+        </span>
+        <p className="text-sm leading-snug text-on-surface-variant">
+          Para un mejor resultado, coloca el alimento sobre un fondo neutro y
+          procura que no haya nada más dentro de la imagen.
+        </p>
+      </div>
+
       <div
         onDragOver={(e) => {
           e.preventDefault();

@@ -76,10 +76,9 @@ export default function ModelSelector({
         </div>
       )}
 
-      {/* Metricas + descripcion del modelo seleccionado */}
+      {/* Metricas del modelo seleccionado */}
       <div className={`glass-card rounded-xl px-3 py-2.5 ${single ? "" : "mt-3"}`}>
-        <p className="text-sm text-on-surface-variant">{current.descripcion}</p>
-        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-on-surface-variant/70">
+        <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-on-surface-variant/70">
           <Metric label="Accuracy" value={`${(current.metricas.accuracy * 100).toFixed(2)}%`} />
           <Metric label="AUC" value={`${(current.metricas.auc * 100).toFixed(2)}%`} />
           <Metric label="Recall podridas" value={`${(current.metricas.recall_rotten * 100).toFixed(1)}%`} />

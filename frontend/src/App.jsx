@@ -125,7 +125,7 @@ export default function App() {
         <div className="mx-auto flex h-20 max-w-5xl items-center justify-between px-4 md:px-8">
           <div className="flex items-center gap-2">
             <span className="material-symbols-outlined text-3xl text-primary">
-              potted_plant
+              nutrition
             </span>
             <h1 className="font-serif text-2xl font-semibold tracking-tight text-primary">
               AlimentoPuro
@@ -133,9 +133,6 @@ export default function App() {
           </div>
           <div className="hidden items-center gap-8 md:flex">
             <span className="font-serif text-[18px] text-primary">Detector</span>
-            <span className="font-serif text-[18px] text-on-surface-variant">
-              Metodología
-            </span>
           </div>
         </div>
       </header>
@@ -143,11 +140,8 @@ export default function App() {
       <main className="mx-auto max-w-5xl">
         {/* Hero */}
         <section className="flex flex-col items-center justify-center px-4 py-14 text-center sm:py-16">
-          <span className="mb-4 inline-block rounded-full bg-tertiary-fixed px-4 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-on-tertiary-fixed-variant">
-            Pureza Botánica
-          </span>
           <h2 className="font-serif text-4xl font-semibold leading-tight text-primary sm:text-5xl">
-            Detector de frescura
+            Detector de calidad del alimento
           </h2>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-on-surface-variant">
             Sube una foto de tu fruta o verdura y nuestra visión artificial te
@@ -277,54 +271,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* Metodología de la IA */}
-        <section className="bg-surface-container/30 px-4 py-20 md:px-8">
-          <div className="mx-auto max-w-4xl space-y-6">
-            <h3 className="font-serif text-3xl font-medium text-primary sm:text-4xl">
-              Descubre cómo se ha hecho esta IA
-            </h3>
-            <div className="h-1 w-20 rounded-full bg-secondary-fixed-dim" />
-            <p className="max-w-2xl text-lg leading-relaxed text-on-surface-variant">
-              Nuestro algoritmo ha sido entrenado meticulosamente utilizando
-              miles de muestras capturadas en entornos controlados y reales.
-            </p>
-            <div className="grid max-w-xl grid-cols-2 gap-4 pt-2">
-              <div className="glass-card rounded-lg p-4">
-                <span className="block font-serif text-2xl text-secondary">50k+</span>
-                <span className="text-xs uppercase tracking-tight text-on-surface-variant/70">
-                  Muestras analizadas
-                </span>
-              </div>
-              <div className="glass-card rounded-lg p-4">
-                <span className="block font-serif text-2xl text-secondary">98.4%</span>
-                <span className="text-xs uppercase tracking-tight text-on-surface-variant/70">
-                  Precisión de pureza
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
-
-      {/* Footer */}
-      <footer className="border-t border-outline-variant/50 bg-surface-container px-4 py-12 md:px-8">
-        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 md:flex-row">
-          <div className="flex flex-col items-center gap-2 md:items-start">
-            <h4 className="font-serif text-xl tracking-tight text-secondary">
-              AlimentoPuro
-            </h4>
-            <p className="text-center text-sm text-on-surface-variant/80 md:text-left">
-              © 2024 AlimentoPuro. Inteligencia Artificial aplicada a alimentos
-              frescos.
-            </p>
-          </div>
-          <div className="flex gap-6">
-            <span className="text-sm text-on-surface-variant">Privacidad</span>
-            <span className="text-sm text-on-surface-variant">Términos</span>
-            <span className="text-sm text-on-surface-variant">Metodología IA</span>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

@@ -16,7 +16,7 @@ const MODEL_URL = `${import.meta.env.BASE_URL}model/model.json`;
 export const MODEL_META = {
   id: "EfficientNetB0",
   arquitectura: "EfficientNetB0",
-  descripcion: "Red eficiente de Google. Modelo de produccion de Fruty.",
+  descripcion: "",
   preprocesado_interno: "Rescaling(255) + normalizacion ImageNet (integrada)",
   metricas: {
     accuracy: 0.9843,
